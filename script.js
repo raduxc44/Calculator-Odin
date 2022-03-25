@@ -18,3 +18,7 @@ const operate = (operator, a, b) => {
             break;
     }
 }
+const numberButtons = document.querySelectorAll('.number');
+const display = document.querySelector('.display-value');
+display.innerText = 0;
+const numberOutput = (num) => { display.innerText += num }
