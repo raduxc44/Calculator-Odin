@@ -55,6 +55,7 @@ const operatorPress = (operator) => {
     if (display.innerHTML != '0') {
         display.innerHTML = '0';
     }
+    console.log(firstOperand)
     secondOperandBuilding()
 }
 
@@ -84,8 +85,10 @@ const firstOperandBuilding = () => {
     buttonNine.addEventListener('click', event => { eachNumberPress(buttonNine) })
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
     deleteButton.addEventListener('click', event => { display.innerHTML = '0' })
+    addOperator.addEventListener('click', event => { return })
 
 }
+
 firstOperandBuilding()
 
 // Building the 2nd operator
