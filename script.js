@@ -24,6 +24,7 @@ const equalButton = document.querySelector('.equal-butt')
 let firstOperand = '0';
 let secondOperand = '0';
 display.innerHTML = '0';
+let typeOfOperation = '';
 
 // A switch for the first operatorBuilding function
 
@@ -31,39 +32,46 @@ let operatorPressSwitch = 0;
 
 // Math functions
 
-const add = (a, b) => a + b;
-const substract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+
 const operate = (operator, a, b) => {
     switch (operator) {
         case "+":
-            add(a, b);
+            a = Number(a); b = Number(b); return a + b;
             break;
         case "-":
-            substract(a, b);
+            a = Number(a); b = Number(b); return a - b;
             break;
         case "*":
-            multiply(a, b);
+            a = Number(a); b = Number(b); return a * b;
             break;
         case "/":
-            divide(a, b);
+            a = Number(a); b = Number(b); return a / b;
             break;
     }
 }
 
 // Operator's function which resets the display value, disables the first Operand building and runs the second one
 
-addOperator.addEventListener('click', event => { operatorButtonPress() })
+addOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sum' })
+subOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sub' })
+multOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'mult' })
+divOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'div' })
+
+
+///////////////////////////////////////////////////////////////////////////////
 
 const operatorButtonPress = () => {
+
     operatorPressSwitch = 1;
+
     operatorSwitchCheck()
 
     const resetDisplayVal = () => {
+
         if (display.innerHTML != '0') {
-            display.innerHTML = '0';
+            display.innerHTML = '0'
         }
+
     }
     resetDisplayVal()
 }
@@ -98,7 +106,13 @@ const firstOperandBuilding = () => {
     buttonEight.addEventListener('click', event => { eachNumberPress(buttonEight) })
     buttonNine.addEventListener('click', event => { eachNumberPress(buttonNine) })
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
-    deleteButton.addEventListener('click', event => { display.innerHTML = '0' })
+
+    deleteButton.addEventListener('click', event => {
+
+        display.innerHTML = '0'
+        firstOperand = '0';
+
+    })
 
 }
 
@@ -135,16 +149,44 @@ const secondOperandBuilding = () => {
     buttonEight.addEventListener('click', event => { eachNumberPress(buttonEight) })
     buttonNine.addEventListener('click', event => { eachNumberPress(buttonNine) })
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
-    deleteButton.addEventListener('click', event => { display.innerHTML = '0' })
-    equalButton.addEventListener('click', event => {
-        if (addOperator()) { display.innerHTML = add(firstOperand, secondOperand) }
+
+    deleteButton.addEventListener('click', event => {
+        display.innerHTML = '0'
+        firstOperand = '0';
+        secondOperand = '0';
+        operatorPressSwitch = 0;
+        operatorSwitchCheck()
+
     })
 
+    equalButton.addEventListener('click', event => {
+
+        switch (typeOfOperation) {
+            case 'sum':
+                display.innerHTML = operate('+', firstOperand, secondOperand);
+                firstOperand = operate('+', firstOperand, secondOperand);
+                break;
+            case 'sub':
+                display.innerHTML = operate('-', firstOperand, secondOperand);
+                firstOperand = operate('-', firstOperand, secondOperand);
+                break;
+            case 'mult':
+                display.innerHTML = operate('*', firstOperand, secondOperand);
+                firstOperand = operate('*', firstOperand, secondOperand);
+                break;
+            case 'div':
+                display.innerHTML = operate('/', firstOperand, secondOperand);
+                firstOperand = operate('/', firstOperand, secondOperand);
+                break;
+        }
+    })
+    ///////////////////////////////////////////////////////////////////////////////////
 }
 
 // This function checks which building function to run
 
 const operatorSwitchCheck = () => {
+
     if (operatorPressSwitch < 1) {
         firstOperandBuilding();
     }
