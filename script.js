@@ -25,10 +25,16 @@ let firstOperand = '0';
 let secondOperand = '0';
 display.innerHTML = '';
 let typeOfOperation = '';
+let deleteSwitch = 0;
+
+
+let firstOperandBuildingSwitch = 0;
+let secondOperandBuildingSwitch = 0;
 
 // A switch for the first operatorBuilding function
 
-let operatorPressSwitch = 0;
+let onOffSwitch = 0;
+let operationSwitch = 0;
 
 // Math functions
 
@@ -55,13 +61,15 @@ const onOffButtFunction = () => {
 
     onOffButton.addEventListener('dblclick', event => {
 
-        if (display.innerHTML == '') {
+        if (onOffSwitch == 0) {
             display.innerHTML = '0';
             firstOperand = '0';
             secondOperand = '0';
-            operatorSwitchCheck()
+            onOffSwitch = 1;
+            chooseOperandFunc()
         }
-        else {
+        else if (onOffSwitch == 1) {
+            onOffSwitch = 0;
             display.innerHTML = ''
             firstOperand = '0';
             secondOperand = '0';
@@ -75,9 +83,10 @@ const onOffButtFunction = () => {
 
 const operatorButtonPress = () => {
 
-    operatorPressSwitch = 1;
+    firstOperandBuildingSwitch = 1
 
-    operatorSwitchCheck()
+    //operatorPressSwitch = 1;
+    if (deleteSwitch == 0) { chooseOperandFunc() }
 
     const resetDisplayVal = () => {
 
@@ -94,17 +103,19 @@ const firstOperandBuilding = () => {
 
     const eachNumberPress = (numButton) => {
 
-        if (display.innerHTML == '0' && operatorPressSwitch == 0) {
+        if (display.innerHTML == '0' && firstOperandBuildingSwitch == 0) {
 
             firstOperand = numButton.innerHTML;
             display.innerHTML = numButton.innerHTML;
 
+
         }
 
-        else if (display.innerHTML.length < 8 && operatorPressSwitch == 0) {
+        else if (display.innerHTML.length < 8 && firstOperandBuildingSwitch == 0) {
 
             firstOperand += numButton.innerHTML;
             display.innerHTML += numButton.innerHTML;
+
 
         }
     }
@@ -127,10 +138,14 @@ const firstOperandBuilding = () => {
 
     onOffButton.addEventListener('click', event => {
 
-        display.innerHTML = '0'
-        firstOperand = '0';
+        if (display.innerHTML != '0' && firstOperandBuildingSwitch == 0) {
+            display.innerHTML = '0'
+            firstOperand = '0';
+            secondOperand = '0';
 
+        }
     })
+
 
 }
 
@@ -156,7 +171,7 @@ const equalButtFunc = () => {
                 break;
         }
         operatorPressSwitch = 1;
-        operatorSwitchCheck();
+        chooseOperandFunc();
     }
 }
 
@@ -166,14 +181,14 @@ const secondOperandBuilding = () => {
 
     const eachNumberPress = (numButton) => {
 
-        if (display.innerHTML == '0' && operatorPressSwitch == 1) {
+        if (display.innerHTML == '0' && firstOperandBuildingSwitch == 1) {
 
             secondOperand = numButton.innerHTML;
             display.innerHTML = numButton.innerHTML;
 
         }
 
-        else if (display.innerHTML.length < 8 && operatorPressSwitch == 1) {
+        else if (display.innerHTML.length < 8 && firstOperandBuildingSwitch == 1) {
 
             secondOperand += numButton.innerHTML;
             display.innerHTML += numButton.innerHTML;
@@ -193,12 +208,19 @@ const secondOperandBuilding = () => {
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
 
     onOffButton.addEventListener('click', event => {
-        display.innerHTML = '0'
-        firstOperand = '0';
-        secondOperand = '0';
-        operatorPressSwitch = 0;
-        operatorSwitchCheck()
 
+        // display.innerHTML = '0'
+        // secondOperand = '0';
+        // operatorPressSwitch = 0;
+        // firstOperandBuildingSwitch = 0;
+        // operatorSwitchCheck()
+        if (display.innerHTML != '0') {
+            display.innerHTML = '0'
+            firstOperand = '0';
+            secondOperand = '0';
+            firstOperandBuildingSwitch = 0;
+            deleteSwitch = 1;
+        }
     })
 
     equalButton.addEventListener('click', event => { equalButtFunc() })
@@ -211,12 +233,12 @@ const secondOperandBuilding = () => {
 
 // This function checks which building function to run
 
-const operatorSwitchCheck = () => {
+const chooseOperandFunc = () => {
 
-    if (operatorPressSwitch < 1) {
-        firstOperandBuilding();
+    if (onOffSwitch == 1 && firstOperandBuildingSwitch == 0) {
+        firstOperandBuilding()
     }
-    else if (operatorPressSwitch == 1) { secondOperandBuilding() }
+    else if (onOffSwitch == 1 && firstOperandBuildingSwitch == 1) { secondOperandBuilding() }
 }
 
 
