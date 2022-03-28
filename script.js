@@ -69,13 +69,17 @@ const onOffButtFunction = () => {
             onOffSwitch = 1;
             chooseOperandFunc()
         }
-        else if (onOffSwitch == 0 && firstOperandBuildingSwitch == 0) {
+        else if (onOffSwitch == 0) {
             display.innerHTML = '0';
+            firstOperandBuildingSwitch = 0;
+            firstOperandBuildingSwitch = 0;
             firstOperand = '0';
             secondOperand = '0';
             onOffSwitch = 1;
         }
         else if (onOffSwitch == 1) {
+            firstOperandBuildingSwitch = 1;
+            secondOperandBuildingSwitch = 1;
             onOffSwitch = 0;
             display.innerHTML = ''
             firstOperand = '0';
@@ -136,10 +140,16 @@ const firstOperandBuilding = () => {
     buttonNine.addEventListener('click', event => { eachNumberPress(buttonNine) })
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
 
-    addOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sum' })
-    subOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sub' })
-    multOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'mult' })
-    divOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'div' })
+    const disableOperatorsUntilInput = () => {
+
+        if (firstOperand != '0') {
+            addOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sum' })
+            subOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sub' })
+            multOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'mult' })
+            divOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'div' })
+        }
+    }
+    disableOperatorsUntilInput();
 
     onOffButton.addEventListener('click', event => {
 
