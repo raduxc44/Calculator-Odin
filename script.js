@@ -1,7 +1,7 @@
 
 // Global declarations
 
-const numberButtons = Array.from(document.querySelectorAll('.number'));
+const numberButtons = document.querySelectorAll('.number');
 const display = document.querySelector('.display-value');
 const buttonOne = document.querySelector('.one')
 const buttonTwo = document.querySelector('.two')
@@ -128,6 +128,17 @@ const firstOperandBuilding = () => {
 
         }
     }
+
+    // To look into!!! Potential replace for all the event listeners
+
+    // for (let i = 0; i < numberButtons.length; i++) {
+
+    //     numberButtons[i].addEventListener('click', event => { eachNumberPress(numberButtons[i]) })
+
+    // }
+
+
+
 
     buttonOne.addEventListener('click', event => { eachNumberPress(buttonOne) })
     buttonTwo.addEventListener('click', event => { eachNumberPress(buttonTwo) })
