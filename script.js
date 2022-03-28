@@ -77,7 +77,7 @@ const onOffButtFunction = () => {
             secondOperand = '0';
             onOffSwitch = 1;
         }
-        else if (onOffSwitch == 1) {
+        else if (onOffSwitch == 1 && firstOperandRanOnce == 1) {
             firstOperandBuildingSwitch = 1;
             secondOperandBuildingSwitch = 1;
             onOffSwitch = 0;
@@ -140,16 +140,20 @@ const firstOperandBuilding = () => {
     buttonNine.addEventListener('click', event => { eachNumberPress(buttonNine) })
     buttonZero.addEventListener('click', event => { eachNumberPress(buttonZero) })
 
-    const disableOperatorsUntilInput = () => {
 
-        if (firstOperand != '0') {
-            addOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sum' })
-            subOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sub' })
-            multOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'mult' })
-            divOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'div' })
-        }
-    }
-    disableOperatorsUntilInput();
+    do {
+        addOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sum' })
+        subOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'sub' })
+        multOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'mult' })
+        divOperator.addEventListener('click', event => { operatorButtonPress(); typeOfOperation = 'div' })
+    } while (
+        firstOperand != '0'
+    )
+
+
+
+
+
 
     onOffButton.addEventListener('click', event => {
 
