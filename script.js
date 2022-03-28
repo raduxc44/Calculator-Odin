@@ -85,7 +85,6 @@ const operatorButtonPress = () => {
 
     firstOperandBuildingSwitch = 1
 
-    //operatorPressSwitch = 1;
     if (deleteSwitch == 0) { chooseOperandFunc() }
 
     const resetDisplayVal = () => {
@@ -138,7 +137,7 @@ const firstOperandBuilding = () => {
 
     onOffButton.addEventListener('click', event => {
 
-        if (display.innerHTML != '0' && firstOperandBuildingSwitch == 0) {
+        if (display.innerHTML != '0' && firstOperandBuildingSwitch == 0 && onOffSwitch == 1) {
             display.innerHTML = '0'
             firstOperand = '0';
             secondOperand = '0';
@@ -170,7 +169,7 @@ const equalButtFunc = () => {
                 firstOperand = operate('/', firstOperand, secondOperand);
                 break;
         }
-        operatorPressSwitch = 1;
+        operationSwitch = 1;
         chooseOperandFunc();
     }
 }
@@ -209,12 +208,7 @@ const secondOperandBuilding = () => {
 
     onOffButton.addEventListener('click', event => {
 
-        // display.innerHTML = '0'
-        // secondOperand = '0';
-        // operatorPressSwitch = 0;
-        // firstOperandBuildingSwitch = 0;
-        // operatorSwitchCheck()
-        if (display.innerHTML != '0') {
+        if (display.innerHTML != '0' && onOffSwitch == 1) {
             display.innerHTML = '0'
             firstOperand = '0';
             secondOperand = '0';
@@ -238,7 +232,7 @@ const chooseOperandFunc = () => {
     if (onOffSwitch == 1 && firstOperandBuildingSwitch == 0) {
         firstOperandBuilding()
     }
-    else if (onOffSwitch == 1 && firstOperandBuildingSwitch == 1) { secondOperandBuilding() }
+    else if (onOffSwitch == 1 && firstOperandBuildingSwitch == 1 && operationSwitch == 0) { secondOperandBuilding() }
 }
 
 
