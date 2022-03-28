@@ -8,8 +8,8 @@ body {
 }
 .calc-body {
     padding: 10px 5px;
-    width: 400px;
-    height: 500px;
+    width: 700px;
+    height: 800px;
     background-color: #0F8B8D;
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@ button {
     border: none;
     margin: 5px;
     height: 20%;
-    font-size: 25px;
+    font-size: 40px;
     box-shadow : 0px 5px 10px 0px rgba(0, 0, 0, 0.623);
 }
 button:active {
@@ -54,7 +54,7 @@ button:active {
 .number, .equal-butt {
     background-color: #ADB9E3;
 }
-.delete-butt{
+.on-off-butt{
     background-color: #ff9de3;
 }
 .operator {
