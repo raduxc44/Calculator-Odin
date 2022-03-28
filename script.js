@@ -29,6 +29,7 @@ let deleteSwitch = 0;
 
 
 let firstOperandBuildingSwitch = 0;
+let firstOperandRanOnce = 0;
 let secondOperandBuildingSwitch = 0;
 
 // A switch for the first operatorBuilding function
@@ -61,12 +62,18 @@ const onOffButtFunction = () => {
 
     onOffButton.addEventListener('dblclick', event => {
 
-        if (onOffSwitch == 0) {
+        if (onOffSwitch == 0 && firstOperandBuildingSwitch == 0 && firstOperandRanOnce == 0) {
             display.innerHTML = '0';
             firstOperand = '0';
             secondOperand = '0';
             onOffSwitch = 1;
             chooseOperandFunc()
+        }
+        else if (onOffSwitch == 0 && firstOperandBuildingSwitch == 0) {
+            display.innerHTML = '0';
+            firstOperand = '0';
+            secondOperand = '0';
+            onOffSwitch = 1;
         }
         else if (onOffSwitch == 1) {
             onOffSwitch = 0;
@@ -77,7 +84,6 @@ const onOffButtFunction = () => {
     })
 
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -99,7 +105,7 @@ const operatorButtonPress = () => {
 // Building the first operand
 
 const firstOperandBuilding = () => {
-
+    firstOperandRanOnce = 1;
     const eachNumberPress = (numButton) => {
 
         if (display.innerHTML == '0' && firstOperandBuildingSwitch == 0) {
