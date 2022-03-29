@@ -18,6 +18,7 @@ const addOperator = document.querySelector('.add')
 const subOperator = document.querySelector('.sub')
 const multOperator = document.querySelector('.mult')
 const divOperator = document.querySelector('.div')
+const operators = Array.from(document.querySelectorAll('.operator'))
 const equalButton = document.querySelector('.equal-butt')
 
 
@@ -88,7 +89,9 @@ const operate = (operator, a, b) => {
 const operatorButtonPress = () => {
 
     firstOperandBuildingSwitch = 1;
-    chooseOperandFunc();
+    let deleteSwitch = 0;
+
+    if (deleteSwitch == 0) { chooseOperandFunc() }
 
     const resetDisplayVal = () => {
 
@@ -211,6 +214,7 @@ const secondOperandBuilding = () => {
             firstOperand = '0';
             secondOperand = '0';
             firstOperandBuildingSwitch = 0;
+            deleteSwitch = 1;
         }
     })
 
